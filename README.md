@@ -14,3 +14,5 @@ Make sure you have Python3 installed on your machine. Move project's root direct
 
 ## Run
 <code>python3 -m pytest</code>
+<code>python3 -m pytest --html=report.html</code>
+

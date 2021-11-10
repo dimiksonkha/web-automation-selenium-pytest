@@ -17,7 +17,7 @@ def config(scope='session'):
 
 
 @pytest.fixture
-def browser(config):
+def driver (config):
  if config['browser'] == 'Firefox':
   b = selenium.webdriver.Firefox()
  elif config['browser'] == 'Chrome': 
