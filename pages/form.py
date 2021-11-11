@@ -17,8 +17,8 @@ class FormPage:
    music_hobby = (By.ID,"hobbies-checkbox-3")
    upload_picture = (By.ID,"uploadPicture")
    current_address = (By.ID,"currentAddress")
-   select_state = (By.XPATH,"//div[text()='Select State']")
-   select_city = (By.XPATH,"//div[text()='Select City']")
+   state_dropdown = (By.XPATH,"//div[text()='Select State']")
+   city_dropdown = (By.XPATH,"//div[text()='Select City']")
    submit_button = (By.ID,"submit")
 
 
@@ -79,7 +79,14 @@ class FormPage:
    def select_file_for_picture_upload(self, filename):
        self.driver.find_element(*self.upload_picture).send_keys(filename)
 
-       
+   def type_current_address(self, current_address):
+       self.driver.find_element(*self.current_address).send_keys(current_address)   
 
+   def select_state_from_state_dropdown(self, state):
+       self.driver.find_element(*self.state_dropdown).select_by_visible_text(state)
 
-           
+   def select_state_from_city_dropdown(self, city):
+       self.driver.find_element(*self.city_dropdown).select_by_visible_text(city)
+
+   def submit_form(self):
+       self.driver.find_element(*self.submit_button).click()            
