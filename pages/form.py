@@ -6,12 +6,12 @@ class FormPage:
    first_name = (By.ID,"firstName")
    last_name = (By.ID,"lastName")
    user_email = (By.ID,"userEmail")
-   gender_male = (By.ID,"gender-radio-1")
-   gender_female = (By.ID,"gender-radio-2")
-   gender_other = (By.ID,"gender-radio-3")
+   gender_male = (By.CSS_SELECTOR,"label[for='gender-radio-1']")
+   gender_female = (By.CSS_SELECTOR,"label[for='gender-radio-2']")
+   gender_other = (By.CSS_SELECTOR,"label[for='gender-radio-3']")
    user_number = (By.ID,"userNumber")
    date_of_birth = (By.ID,"dateOfBirthInput")
-   subject = (By.CLASS_NAME,"subjects-auto-complete__value-container subjects-auto-complete__value-container--is-multi css-1hwfws3")
+   subject = (By.ID,"subjectsInput")
    sports_hobby = (By.ID,"hobbies-checkbox-1")
    reading_hobby = (By.ID,"hobbies-checkbox-2")
    music_hobby = (By.ID,"hobbies-checkbox-3")
@@ -25,7 +25,7 @@ class FormPage:
    def __init__(self, driver):
        self.driver = driver
        driver.find_element(*self.practice_form_link).click()
-       #driver.maximize_window() 
+       driver.maximize_window() 
        #driver.execute_script("window.scrollTo(0, 200)")
        
     
@@ -52,10 +52,11 @@ class FormPage:
        else:
         NameError('Invalid gender type')
 
-   def user_number(self, user_number):
+   def type_user_number(self, user_number):
        self.driver.find_element(*self.user_number).send_keys(user_number)
    
    def type_date_of_birth(self, date_of_birth):
+       self.driver.find_element(*self.date_of_birth).clear()
        self.driver.find_element(*self.date_of_birth).send_keys(date_of_birth)
 
    def type_subject(self, subject):
@@ -85,7 +86,7 @@ class FormPage:
    def select_state_from_state_dropdown(self, state):
        self.driver.find_element(*self.state_dropdown).select_by_visible_text(state)
 
-   def select_state_from_city_dropdown(self, city):
+   def select_city_from_city_dropdown(self, city):
        self.driver.find_element(*self.city_dropdown).select_by_visible_text(city)
 
    def submit_form(self):
