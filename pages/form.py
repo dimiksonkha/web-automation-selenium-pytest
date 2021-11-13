@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 import random
 
 class FormPage:
+   #selectors 
    practice_form_link = (By.XPATH,"//span[text()='Practice Form']")
    first_name = (By.ID,"firstName")
    last_name = (By.ID,"lastName")
@@ -31,8 +32,6 @@ class FormPage:
        self.driver = driver
        driver.find_element(*self.practice_form_link).click()
        
-       
-    
     
    def type_first_name(self, first_name):
        self.driver.find_element(*self.first_name).send_keys(first_name)
@@ -103,6 +102,7 @@ class FormPage:
    def close_ads(self):
        self.driver.find_element(*self.ads_close_button).click()
 
+   #helper method 
    def get_random_email(self):
        return 'hilsha.fish_'+str(random.randint(1,1000))+'@sea.com';    
                     

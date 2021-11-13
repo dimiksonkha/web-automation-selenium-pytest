@@ -13,7 +13,8 @@ Make sure you have Python3 installed on your machine. Move project's root direct
 <code>pip freeze </code>
 
 ## Run
+Run tests and view report in terminal
 <code>python3 -m pytest</code><br>
-Run tests with html report<br>
+Run tests and view html report<br>
 <code>python3 -m pytest --html=report.html</code>
 
