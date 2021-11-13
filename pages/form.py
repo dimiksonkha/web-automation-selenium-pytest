@@ -1,5 +1,8 @@
 from selenium.webdriver.common.by import By
-
+import os
+from selenium.webdriver.support import select
+from selenium.webdriver.common.keys import Keys
+import random
 
 class FormPage:
    practice_form_link = (By.XPATH,"//span[text()='Practice Form']")
@@ -12,21 +15,22 @@ class FormPage:
    user_number = (By.ID,"userNumber")
    date_of_birth = (By.ID,"dateOfBirthInput")
    subject = (By.ID,"subjectsInput")
-   sports_hobby = (By.ID,"hobbies-checkbox-1")
-   reading_hobby = (By.ID,"hobbies-checkbox-2")
-   music_hobby = (By.ID,"hobbies-checkbox-3")
+   sports_hobby = (By.CSS_SELECTOR,"label[for='hobbies-checkbox-1']")
+   reading_hobby = (By.CSS_SELECTOR,"label[for='hobbies-checkbox-2']")
+   music_hobby = (By.CSS_SELECTOR,"label[for='hobbies-checkbox-3']")
    upload_picture = (By.ID,"uploadPicture")
    current_address = (By.ID,"currentAddress")
-   state_dropdown = (By.XPATH,"//div[text()='Select State']")
-   city_dropdown = (By.XPATH,"//div[text()='Select City']")
+   state_dropdown = (By.ID,"react-select-3-input")
+   city_dropdown = (By.ID,"react-select-4-input")
    submit_button = (By.ID,"submit")
+   modal_close_button = (By.ID,"closeLargeModal")
+   ads_close_button = (By.ID,'close-fixedban')
 
 
    def __init__(self, driver):
        self.driver = driver
        driver.find_element(*self.practice_form_link).click()
-       driver.maximize_window() 
-       #driver.execute_script("window.scrollTo(0, 200)")
+       
        
     
     
@@ -78,16 +82,27 @@ class FormPage:
              NameError('Invalid hobby')
 
    def select_file_for_picture_upload(self, filename):
-       self.driver.find_element(*self.upload_picture).send_keys(filename)
+       self.driver.find_element(*self.upload_picture).send_keys(os.getcwd()+'/'+filename)
 
    def type_current_address(self, current_address):
        self.driver.find_element(*self.current_address).send_keys(current_address)   
 
    def select_state_from_state_dropdown(self, state):
-       self.driver.find_element(*self.state_dropdown).select_by_visible_text(state)
-
+       self.driver.find_element(*self.state_dropdown).send_keys(state, Keys.RETURN)
+       
    def select_city_from_city_dropdown(self, city):
-       self.driver.find_element(*self.city_dropdown).select_by_visible_text(city)
+       self.driver.find_element(*self.city_dropdown).send_keys(city, Keys.RETURN)
+       
 
    def submit_form(self):
-       self.driver.find_element(*self.submit_button).click()            
+       self.driver.find_element(*self.submit_button).click()
+
+   def close_modal(self):
+       self.driver.find_element(*self.modal_close_button).click()
+   
+   def close_ads(self):
+       self.driver.find_element(*self.ads_close_button).click()
+
+   def get_random_email(self):
+       return 'hilsha.fish_'+str(random.randint(1,1000))+'@sea.com';    
+                    
